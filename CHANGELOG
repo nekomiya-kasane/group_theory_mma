@@ -1,0 +1,192 @@
+------------------------------------------------------------------
+VERSION 1.4
+------------------------------------------------------------------
+Date: ..., 2020
+Build with Mathematica 12.1
+
+Bug fixes/Changes:
+----------
+- GTAngularMomentumRep - coefficients for tesseral harmonics were revised
+- GTGetMatrix - did not work for magnetic groups/elements
+- GTTransformationOperator - fixed bug with argument
+- GTSU2Matrix - wrong prefactor of "-1" removed
+
+
+New modules and extensions:
+--------------------------- 
+- GTGetIrep - Cornwell method works also for double groups and is significantly improved. The Cornwell method is now the standard method of GTGetIrep
+- GTAngularMomentumRep - Option GOEvenOdd allows to control if a representation is even or odd under inversion
+- GTAngularMomentumChars - Option GOEvenOdd allows to control if a representation is even or odd under inversion
+
+= GTPack 1.4 comes with a new package SimPack.m
+
+The package consists of a series of external FORTRAN programs to calculate band structures, densities of states and
+fitting processures to fit tight-binding models exported from GTPack to ab initio band structures. The following modules
+connect GTPack and SimPack:
+
++ GTTbParmExport  - exports TB parameters for external use
++ GTTbParmImport  - imports TB parameter set and transforms it in the usual GTPack format
++ GTTbFitExport   - exports TB band structures to be used to test fitting strategies
++ GTBZTbPointMesh - exports k-mesh for external use
++ GTTbReadBands   - imports band structure calculated by SimPack
++ GTTbReadDos     - imports density of states 
+
+= GTPAck 1.4 comes with a new package Wyckoff.m
+
+The Wyckoff package is in a preliminary state. It will be further tested and extended. 
+
++ GTInstallWyckoff   - installs a new set of Wyckoff positions in wyckoff 
++ GTAllWyckoff       - list all currently installed Wyckoff positions
++ GTClearWyckoff     - removes all currently installed Wyckoff positions
++ GTLoadWyckoff      - loads a list of Wyckoff positions from a database
++ GTGetWyckoff       - gives Wyckoff positions for a space group and setting
++ GTSaveWyckoff      - saves the content of wyckoff to a database
++ GTCoordFromWyckoff - generates part of GTPack structure file from Wyckoff positions
++ wyckoff            - global variable for Wyckoff positions
+ 
+= new in Auxiliary
+
++ GTCayleyGraph - constructs the Cayley graph of a point group
++ GTSetMessage  - directs messages to Notebook or Mathematica's Message window
+
+= new in Crystal structure
+
++ GTChangeCoord - changes coordinates of basis atoms given in terms of lattice vectors t Cartesian coordinates
+                  GTPackR.struc is a extended database with positions of basis atoms in terms of lattice vectors
++ GTAtomsinCell - finds atoms in a region of a cluster
++ GTCellPlot    - can be used to plot primitive or conventional unit cells (used mainly in GtBravaisLattice)
+
+
+
+
+------------------------------------------------------------------
+VERSION 1.3
+------------------------------------------------------------------
+Date: December 15, 2020
+Build with Mathematica 12.1
+
+Bug fixes/Changes:
+----------
+- GTSGLeftCosets/GTSGRightCosets - we now enforce an ordering of the cosets with respect to the order of the element to avoid nontrivial coset representatives (taken as first element of the list) for trivial coset decompositions G = E G. Related problems occured, e.g., for the space group representations calculated using GTSGGetIreps
+- GTGetIreps - the previous version did not output the names of the irreducible presentations. This was fixed for the curent version.
+- GTSubgroupQ - new, simplified code; GOFast option added
+- GTLeftCosets - new, simplified code
+- GTRightCosets - new, simplified code
+
+New modules and extensions:
+--------------------------- 
+
+= GTPack 1.3 comes with a new package AngularMomentum.m
+
++ GTAngularMomentumChars - calculates the character system for ireps of SU(2) (SO(3))
++ GTAngularMomentumRep - calculates the representation matrices for ireps of SU(2) (SO(3))
++ GTJz         - gives the z component of the total angular momentum operator for angular momentum J
++ GTJx         - gives the x component of the total angular momentum operator for angular momentum J 
++ GTJy         - gives the x component of the total angular momentum operator for angular momentum J 
++ GTJplus      - gives the total angular momentum raising operator for angular momentum J 
++ GTJminus     - gives the total angular momentum lowering operator for angular momentum J 
++ GTJMatrix    - gives the representation matrix of an element for an irreducible representation of SU(2) (SO(3))
++ GTJTransform - applies a symmetry transformation to the basis functions of an irreducible representation of SU(2) (SO(3)) with angular momentum J
++ GTPauliMatrix - gives the generalized Pauli matrix for higher angular momenta
+
+
+------------------------------------------------------------------
+VERSION 1.2
+------------------------------------------------------------------
+Date: June 26, 2020
+Build with Mathematica 12.1
+
+Bug fixes:
+----------
+- GTSGGetIreps - did not work properly in rare cases. The command was furthermore extended to work properly for double groups. The general user experience was improved as well
+- GTAngularMomentumChars - new implementation as the old module had issues in selcted cases
+- GTClasses - fixed an issue with doubly occuring elements, e.g., for group C5
+- GTCharacterTable - fixed notation mismatch for the point group O
+
+New modules and extensions:
+---------------------------
+
+Details of the new modules or the modifications can be found in the corresponding documentation 
+pages.
+
+- GTCharacterTable   - added option GOMethod to control numerical/analytical evaluation 
++ GTGetIreps         - calculates character table and representation matrices of point groups
++ GTGetIrep          - the induction method was added to GTGetIrep
+- GTGroupQ           - added option GOMethod to control numerical/analytical evaluation
++ GTInvSubGroup      - calculates an invariant subgroup of specified index
+
+------------------------------------------------------------------
+VERSION 1.1
+------------------------------------------------------------------
+Date: March 1st, 2020
+Build with Mathematica 11.3
+
+The solutions to the exercises can now be found on the Webpage.
+
+Changes:
+--------
+
+Starting with this release warnings and error messages will be given in Mathematica style.
+This change will be realized step by step. New modules or modifies modules will use the new scheme. 
+
+In some GTPack modules code from other sources is used. This is mentioned in the 
+documentation of the corresponding module. Starting with this version such modules are collected in 
+the package ThirdParty.m. This package substitutes TwoAxisListPlot.m.
+
+There is a new subpackage RepresentationTheorySG.m collecting all necessary modules to calculate irreducible representations (matrices and characters) of space groups. Some of the new commands have analogue commands for point groups (e.g. GTClasses and GTSGClasses). Those modules will potentially be merged in a later version of GTPack. The module GTStarOfK was moved to GTRepresentationTheorySG. A list of new modules is given below.
+
+All guide packages and tutorials of the GTPack documentation were revised. Furthermore, we added various new tutorials (Crystal Field Theory - Stevens Operators and Ho/Pt(111); Handling of symmetry elements: multiplication, symbols, matrices, etc; Installation of double groups; Installation of point groups and character tables; Representation matrices and projection operators; Standard representations - O(3), SU(2), SU(2)xS; Tight-binding electronic structure of graphene).
+
+Bug fixes:
+----------
+
+- GTTableToGroup      - was not general enough. See documentation for more examples.
+- GTPhUncoupledBands  - instead of a rule, a transformation matrix is used to express the symmetry 
+                        properties (see documentation)
+
+In GTPack all lattice vectors and also reciprocal lattice vectors are expressed in terms of Cartesian
+unit vectors. If you stay within GTPack everything is consistent, but problems might occur in connection to external programs. In MPB the vectors in k-space are expressed in terms of the reciprocal 
+lattice vectors. This has to be taken into account if the lattice is not square or cubic. 
+Thus, GTPhMPBBands is changed. One has to provide the reciprocal basis now. During reading a recalculation to the Cartesian basis is performed. A similar problem occurs in GTBZMPBPointMesh. A point mesh is constructed to get the photonic band structure information for a DOS calculation. Also information about the reciprocal lattice is necessary now. (Thanks to Aitzol Garcia-Etxarri for the discussion of this problem).
+
+- GTPhMPBBands        - reciprocal lattice information now necessary, see documentation
+- GTBZMPBPointMesh    - reciprocal lattice information now necessary, see documentation
+
+Minor changes were undertaken in the module GTCharacterTable
+
+- GTCharacterTable    - revision of the denotation of the irreducible representations
+
+New modules and extensions:
+---------------------------
+
+Details of the new modules or the modifications can be found in the corresponding documentation 
+pages.
+ 
++ GTPartialDOS        - calculation of partial densities of states (TB Hamiltonians)
++ GTFatBandsPlot      - plots orbital character of a band structure (TB Hamiltonians)
++ GTClusterManipulate - The new method "Impurities" is added. This allows to substitute a randomly
+                        chosen part of one sort of atoms in the cluster by another sort.
++ GTDensityOfStatesRS - Now it is possible to provide instead of the Hamiltonian also the eigenvalues
+                        resulting from the cluster Hamiltonian. This allows to calculate the eigenvalues 
+                        outside of Mathematica.                      
+
+New modules in the subpackage GTRepresentationTheorySG:
+
++ GTCharacterTableOfK     - gives the character table of a space group (The command was replaced by the new command GTSGCharacterTable)"
++ GTSGCharacterTable      - gives the character table of a space group
++ GTSGCosetRepresentative - determines a coset representative for a left coset decomposition of the factor group G/T (G being a space group, T the group of pure lattice translations) into a normal subgroup of index 2 or 3"  
++ GTSGClasses             - gives the classes of a factor group of the factor group G/T (G being a space group, T the group of pure lattice translations)
++ GTSGgmat                - multiplies two space group elements
++ GTSGGetInvSubGroup      - gives an invariant subgroup of the factor group G/T (G being a space group, T the group of pure lattice translations) with a specified index
++ GTSGGetIreps            - gives the character table and representation matrices of a space group
++ GTSGLeftCosets          - gives the left cosets of the factor group G/T (G being a space group, T the group of pure lattice translations) with respect to a subgroup
++ GTSGOrderOfElement      - gives the order of a space group element
++ GTSGRightCosets         - gives the right cosets of the factor group G/T (G being a space group, T the group of pure lattice translations) with respect to a subgroup
+
+
+-------------
+VERSION 1.0.0
+-------------
+
+Date: July 3rd, 2018
+Build with Mathematica 10.4
